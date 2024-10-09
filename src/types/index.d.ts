@@ -1,0 +1,16 @@
+interface Post {
+  id: number;
+  cover: string;
+  title: string;
+  slug: string;
+  body: string;
+  markdown: string;
+  author: Author;
+}
+
+interface Author {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string;
+}
