@@ -14,3 +14,13 @@ interface Author {
   username: string;
   avatar: string;
 }
+
+interface PaginatedData<T> {
+  first: number;
+  prev: number | null;
+  next: number | null;
+  last: number;
+  page: number;
+  items: number;
+  data: T[];
+}

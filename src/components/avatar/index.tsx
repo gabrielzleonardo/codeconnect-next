@@ -6,7 +6,7 @@ interface Avatar {
 }
 const Avatar = ({ name, imageSrc }: Avatar) => {
   return (
-    <ul>
+    <ul className="flex items-center py-[7.5px] gap-x-[4.5px] ml-auto">
       <li>
         <Image
           src={imageSrc}
