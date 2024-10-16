@@ -42,6 +42,12 @@ const config: Config = {
         "gray-400": "#171D1F",
         "gray-500": "#00090E",
       },
+      keyframes: {
+        rotate: {
+          "0%": { transform: "rotate(0)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
     },
   },
   plugins: [],

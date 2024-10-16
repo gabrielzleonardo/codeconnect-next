@@ -6,6 +6,8 @@ interface Post {
   body: string;
   markdown: string;
   author: Author;
+  likes: number;
+  comments: any[];
 }
 
 interface Author {
