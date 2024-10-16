@@ -3,6 +3,7 @@ import logger from "@/logger";
 import Link from "next/link";
 import db from "../../prisma/db";
 import { Prisma } from "@prisma/client";
+import { dynamicBlurDataUrl } from "@/utils/dynamicBlurDataUrl";
 
 const getAllPosts = async (currentPage: number, searchTerm?: string) => {
   try {
@@ -12,6 +13,14 @@ const getAllPosts = async (currentPage: number, searchTerm?: string) => {
         contains: searchTerm,
         mode: "insensitive",
       };
+      if (searchTerm.includes("@")) {
+        where.author = {
+          name: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        };
+      }
     }
     const perPage = 6;
     const skip = (currentPage - 1) * perPage;
@@ -28,9 +37,10 @@ const getAllPosts = async (currentPage: number, searchTerm?: string) => {
       where,
       include: {
         author: true,
+        comments: true,
       },
       orderBy: {
-        createdAt: "desc",
+        id: "desc",
       },
     });
     return {
@@ -57,9 +67,22 @@ const Home = async ({
     next,
   } = await getAllPosts(currentPage, searchTerm);
 
+  const getResources = async (data: Post[]) => {
+    const resources = await Promise.all(
+      data.map(async (post) => ({
+        ...post,
+        blurHash: await dynamicBlurDataUrl(post.cover),
+      }))
+    );
+
+    return resources;
+  };
+
+  const posts = await getResources(postsData);
+
   return (
     <main className="grid gap-6 md:grid-cols-2 auto-rows-max">
-      {postsData.map((post) => (
+      {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
       {prev && (
