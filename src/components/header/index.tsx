@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "../button";
-import SearchForm from "../search-form";
+import SearchForm from "../search-box";
 const Header = () => {
   return (
     <header className="grid place-items-center [&>*]:mb-12">
