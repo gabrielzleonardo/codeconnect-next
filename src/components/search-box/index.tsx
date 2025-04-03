@@ -9,7 +9,7 @@ const SearchForm = () => {
         name="q"
         leftEl={<SearchIcon size={22} color="currentColor" />}
         variant="primary"
-        className="grow w-full [&_input]:md:paragraph-lg md:[&_svg]:size-8 lg:"
+        className="grow w-full [&_input]:md:paragraph-lg md:[&_svg]:size-8"
         placeholder="Digite o que você procura"
       />
       <Button variant="primary" className="w-fit self-center">
